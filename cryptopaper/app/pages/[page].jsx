@@ -3,17 +3,25 @@ import { ScrollView, StyleSheet, Text, View, useColorScheme } from "react-native
 import AssetChartSection from "../../components/AssetChartSection";
 import AssetDetailsSection from "../../components/AssetDetailsSection";
 import CryptoListSection from "../../components/CryptoListSection";
+import DashboardSection from "../../components/DashboardSection";
 import PageHeader from "../../components/PageHeader";
 import PaperTradingSection from "../../components/PaperTradingSection";
+import ProfileSection from "../../components/ProfileSection";
 import NewsFeedSection from "../../components/NewsFeedSection";
+import UserManagementSection from "../../components/UserManagementSection";
+import LoginSection from "../../components/auth/LoginSection";
+import LogoutSection from "../../components/auth/LogoutSection";
+import RegisterSection from "../../components/auth/RegisterSection";
 import { appTheme } from "../../constants/theme";
 
 const PAGE_TITLES = {
+  login: "Login",
+  register: "Register",
+  logout: "Log out",
   dashboard: "Dashboard",
   "crypto-list": "Cryptocurrency Listing",
   "asset-detail": "Asset Detail",
   profile: "User Profile",
-  "admin-dashboard": "Admin Dashboard",
   "user-management": "User Management",
   "news-feed": "News Feed",
 };
@@ -54,7 +62,15 @@ export default function GenericPage() {
         contentContainerStyle={styles.contentContainer}
         showsVerticalScrollIndicator={false}
       >
-        {pageKey === "crypto-list" ? (
+        {pageKey === "dashboard" ? (
+          <>
+            <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
+            <Text style={[styles.pageDescription, { color: colors.text }]}>
+              Overview of bought crypto assets for all users.
+            </Text>
+            <DashboardSection colors={colors} />
+          </>
+        ) : pageKey === "crypto-list" ? (
           <>
             <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
             <Text style={[styles.pageDescription, { color: colors.text }]}>
@@ -74,7 +90,11 @@ export default function GenericPage() {
               coinName={selectedCoinName}
             />
             <AssetDetailsSection colors={colors} coinId={selectedCoinId} />
-            <PaperTradingSection colors={colors} />
+            <PaperTradingSection
+              colors={colors}
+              coinId={selectedCoinId}
+              coinName={selectedCoinName}
+            />
           </>
         ) : pageKey === "news-feed" ? (
           <>
@@ -83,6 +103,36 @@ export default function GenericPage() {
               Latest crypto headlines from the API.
             </Text>
             <NewsFeedSection colors={colors} />
+          </>
+        ) : pageKey === "profile" ? (
+          <>
+            <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
+            <Text style={[styles.pageDescription, { color: colors.text }]}>
+              Manage account details and profile photo.
+            </Text>
+            <ProfileSection colors={colors} />
+          </>
+        ) : pageKey === "user-management" ? (
+          <>
+            <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
+            <Text style={[styles.pageDescription, { color: colors.text }]}>
+              View all system users and manage account credentials.
+            </Text>
+            <UserManagementSection colors={colors} />
+          </>
+        ) : pageKey === "login" || pageKey === "register" || pageKey === "logout" ? (
+          <>
+            <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
+            <Text style={[styles.pageDescription, { color: colors.text }]}>
+              Authentication.
+            </Text>
+            {pageKey === "login" ? (
+              <LoginSection colors={colors} />
+            ) : pageKey === "register" ? (
+              <RegisterSection colors={colors} />
+            ) : (
+              <LogoutSection colors={colors} />
+            )}
           </>
         ) : (
           <>

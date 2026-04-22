@@ -9,32 +9,50 @@ import {
   useColorScheme,
 } from "react-native";
 import { appTheme } from "../constants/theme";
-import { sessionState } from "../constants/session";
+import { useSessionState } from "../constants/session";
 import appLogo from "../assets/images/5eca783f2637b4df2ade7fd7ebc54ad8.webp";
 
-const MENU_PAGES = [
+const MAIN_MENU_PAGES = [
   { key: "dashboard", label: "Dashboard" },
   { key: "crypto-list", label: "Cryptocurrency Listing" },
   { key: "profile", label: "User Profile" },
-  { key: "admin-dashboard", label: "Admin Dashboard", adminOnly: true },
   { key: "user-management", label: "User Management", adminOnly: true },
   { key: "news-feed", label: "News Feed" },
+];
+
+const AUTH_MENU_PAGES = [
+  { key: "login", label: "Login", guestOnly: true },
+  { key: "register", label: "Register", guestOnly: true },
+  { key: "logout", label: "Log out", authOnly: true },
 ];
 
 export default function Index() {
   const colorScheme = useColorScheme();
   const colors = appTheme[colorScheme] ?? appTheme.light;
+  const sessionState = useSessionState();
   const authState = {
     isLoggedIn: sessionState.isLoggedIn,
     role: sessionState.user?.role ?? "guest",
   };
 
-  const visibleMenuPages = MENU_PAGES.filter((page) => {
+  const visibleMainMenuPages = MAIN_MENU_PAGES.filter((page) => {
     if (!page.adminOnly) {
       return true;
     }
 
     return authState.isLoggedIn && authState.role === "admin";
+  });
+
+  const visibleAuthMenuPages = AUTH_MENU_PAGES.filter((page) => {
+    if (page.authOnly && !authState.isLoggedIn) {
+      return false;
+    }
+
+    if (page.guestOnly && authState.isLoggedIn) {
+      return false;
+    }
+
+    return true;
   });
 
   return (
@@ -62,7 +80,7 @@ export default function Index() {
         </View>
 
         <View style={styles.menuList}>
-          {visibleMenuPages.map((page) => (
+          {visibleMainMenuPages.map((page) => (
             <Pressable
               key={page.key}
               style={[styles.menuButton, { backgroundColor: colors.primary }]}
@@ -73,6 +91,25 @@ export default function Index() {
               </Text>
             </Pressable>
           ))}
+
+          {!!visibleAuthMenuPages.length && (
+            <>
+              <View
+                style={[styles.authSeparator, { borderBottomColor: colors.border }]}
+              />
+              {visibleAuthMenuPages.map((page) => (
+                <Pressable
+                  key={page.key}
+                  style={[styles.menuButton, { backgroundColor: colors.primary }]}
+                  onPress={() => router.push(`/pages/${page.key}`)}
+                >
+                  <Text style={[styles.menuButtonText, { color: colors.buttonText }]}>
+                    {page.label}
+                  </Text>
+                </Pressable>
+              ))}
+            </>
+          )}
         </View>
       </ScrollView>
     </View>
@@ -129,6 +166,11 @@ const styles = StyleSheet.create({
   },
   menuList: {
     gap: 12,
+  },
+  authSeparator: {
+    marginTop: 6,
+    marginBottom: 6,
+    borderBottomWidth: 1,
   },
   menuButton: {
     borderRadius: 12,

@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, useColorScheme } from "react-native";
+import { Image, StyleSheet, Text, View, useColorScheme } from "react-native";
+import { useSessionState } from "../constants/session";
 import { appTheme } from "../constants/theme";
-import { sessionState } from "../constants/session";
 
 function formatCurrency(amount) {
   return new Intl.NumberFormat("en-US", {
@@ -21,9 +21,11 @@ function getInitials(username) {
 export default function AppTopHeader() {
   const colorScheme = useColorScheme();
   const colors = appTheme[colorScheme] ?? appTheme.light;
+  const sessionState = useSessionState();
   const isLoggedIn = sessionState.isLoggedIn;
   const username = sessionState.user?.username ?? "User";
   const availableFunds = sessionState.user?.availableFunds ?? 0;
+  const profilePicture = sessionState.user?.profilePicture;
 
   return (
     <View
@@ -35,16 +37,23 @@ export default function AppTopHeader() {
       {isLoggedIn ? (
         <View style={styles.loggedInRow}>
           <View style={styles.userInfo}>
-            <View
-              style={[
-                styles.avatar,
-                { backgroundColor: colors.primary, borderColor: colors.border },
-              ]}
-            >
-              <Text style={[styles.avatarText, { color: colors.buttonText }]}>
-                {getInitials(username)}
-              </Text>
-            </View>
+            {profilePicture ? (
+              <Image
+                source={{ uri: profilePicture }}
+                style={[styles.avatarImage, { borderColor: colors.border }]}
+              />
+            ) : (
+              <View
+                style={[
+                  styles.avatar,
+                  { backgroundColor: colors.primary, borderColor: colors.border },
+                ]}
+              >
+                <Text style={[styles.avatarText, { color: colors.buttonText }]}>
+                  {getInitials(username)}
+                </Text>
+              </View>
+            )}
             <View>
               <Text style={[styles.usernameLabel, { color: colors.text }]}>
                 @{username}
@@ -96,6 +105,12 @@ const styles = StyleSheet.create({
     borderRadius: 21,
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 1,
+  },
+  avatarImage: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
     borderWidth: 1,
   },
   avatarText: {

@@ -1,8 +1,16 @@
 import { Stack } from "expo-router";
+import { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import AppTopHeader from "../components/AppTopHeader";
+import { bootstrapDatabase } from "../database/bootstrap";
 
 export default function RootLayout() {
+  useEffect(() => {
+    bootstrapDatabase().catch((error) => {
+      console.error("Database bootstrap failed:", error);
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <AppTopHeader />
