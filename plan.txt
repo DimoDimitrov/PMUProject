@@ -1,0 +1,364 @@
+================================================================================
+CRYPTOPAPER - Paper Trading Platform
+Bachelor's Project Plan - Computer and Software Engineering
+================================================================================
+
+PROJECT OVERVIEW
+----------------
+A React Native mobile application for paper trading cryptocurrencies.
+Users can practice trading with virtual money, track their portfolio,
+and learn about crypto markets without financial risk.
+
+Scope: Single semester solo project
+Target: University presentation (5+ minutes)
+
+================================================================================
+PHASE 1: FOUNDATION & DESIGN (Weeks 1-2)
+================================================================================
+
+1.1 REQUIREMENTS ANALYSIS
+-------------------------
+[v] Document functional requirements (what the app does)
+    - 
+[v] Document non-functional requirements (performance, security, scalability)
+[v] Map user stories for each user type (Customer, Admin)
+
+1.2 SYSTEM ARCHITECTURE DESIGN
+------------------------------
+[v] Choose architecture pattern (MVVM, Clean Architecture, or Redux-based) 
+    - MVVM will be used
+[ ] Design component hierarchy diagram
+[ ] Plan state management strategy (Redux Toolkit / Zustand / Context API)
+[ ] Design navigation flow (React Navigation)
+[ ] Create database schema design (SQLite with WatermelonDB or Realm)
+[ ] Plan API integration layer (axios interceptors, error handling, caching)
+
+1.3 TECHNOLOGY STACK SELECTION
+------------------------------
+[V] React Native CLI vs Expo (recommend: CLI for full control)
+    - I am using Expo
+[V] Database: SQLite with react-native-sqlite-storage or WatermelonDB
+    - Whatever I can use with an ORM and don't need to connect to an external software.
+[ ] State management: Redux Toolkit + RTK Query
+[ ] Navigation: React Navigation v6+
+[ ] Charts: react-native-gifted-charts or victory-native
+[ ] Image handling: react-native-image-picker + react-native-fast-image
+[ ] Security: react-native-keychain for secure storage, bcrypt for hashing
+[ ] API: CoinGecko (free) or CoinMarketCap for crypto data, CryptoCompare for news
+
+1.4 DEVELOPMENT ENVIRONMENT SETUP
+---------------------------------
+[ ] Initialize React Native project with TypeScript
+[ ] Configure ESLint, Prettier, Husky for code quality
+[ ] Set up folder structure (feature-based or layer-based)
+[ ] Configure environment variables handling
+[v] Set up Git with proper .gitignore
+
+================================================================================
+PHASE 2: CORE INFRASTRUCTURE (Weeks 3-4)
+================================================================================
+
+2.1 PROJECT STRUCTURE
+---------------------
+src/
+├── components/          # Reusable UI components
+├── screens/             # Screen components
+├── navigation/          # Navigation configuration
+├── store/               # Redux store, slices, actions
+├── services/            # API services, external integrations
+├── database/            # Database schema, migrations, queries
+├── hooks/               # Custom React hooks
+├── utils/               # Helper functions, validators
+├── types/               # TypeScript types and interfaces
+├── constants/           # App constants, colors, strings
+└── assets/              # Images, fonts, icons
+
+[ ] Implement folder structure
+[ ] Create base component templates
+[ ] Set up navigation containers
+
+2.2 DATABASE LAYER
+------------------
+Tables to create:
+- users (id, email, password_hash, name, profile_image, role, created_at, updated_at)
+- portfolios (id, user_id, crypto_id, amount, avg_buy_price, current_value)
+- transactions (id, user_id, crypto_id, type, amount, price, total, timestamp)
+- watchlists (id, user_id, crypto_id, added_at)
+- sessions (id, user_id, token, expires_at, device_info)
+
+[ ] Design tables: users, portfolios, transactions, watchlists, sessions
+[ ] Create database initialization and migration system
+[ ] Implement CRUD operations for each entity
+[ ] Add database seeding for demo data
+[ ] Create repository pattern for data access abstraction
+
+2.3 AUTHENTICATION SYSTEM
+-------------------------
+[ ] User registration with validation (email, password strength)
+[ ] Password hashing (bcryptjs or similar)
+[ ] Login with credential validation
+[ ] Session management (JWT or secure token storage)
+[ ] Auto-login on app restart
+[ ] Logout functionality with session cleanup
+[ ] Password reset flow (optional, via email simulation)
+
+2.4 SECURITY IMPLEMENTATION
+---------------------------
+[ ] Secure storage for tokens (react-native-keychain)
+[ ] Input validation and sanitization
+[ ] API request signing/headers security
+[ ] Protection against common vulnerabilities (XSS, injection)
+[ ] Role-based access control (RBAC) middleware
+
+================================================================================
+PHASE 3: USER FEATURES (Weeks 5-7)
+================================================================================
+
+3.1 ONBOARDING FLOW
+-------------------
+[ ] Splash screen with app logo
+[ ] Welcome/intro screens (carousel)
+[ ] Login screen with form validation
+[ ] Register screen with validation
+[ ] Biometric authentication (fingerprint/face ID) - optional bonus
+
+3.2 MAIN DASHBOARD
+------------------
+[ ] Portfolio overview (total value, 24h change)
+[ ] Top holdings display
+[ ] Quick actions (buy, sell, deposit)
+[ ] Market summary section
+[ ] Pull-to-refresh functionality
+[ ] Loading states and skeleton screens
+
+3.3 CRYPTOCURRENCY LISTING
+--------------------------
+[ ] List of cryptocurrencies with search
+[ ] Sorting options (price, market cap, volume, change %)
+[ ] Filtering options (top gainers, losers, by category)
+[ ] Real-time price updates (polling or WebSocket)
+[ ] Favorite/watchlist functionality
+[ ] Infinite scroll pagination
+
+3.4 ASSET DETAIL PAGE
+---------------------
+[ ] Current price and 24h stats
+[ ] Interactive price chart (1D, 1W, 1M, 1Y, ALL)
+[ ] Market data (market cap, volume, supply)
+[ ] Buy/Sell action panel
+[ ] Transaction history for this asset
+[ ] Add to watchlist button
+[ ] Price alerts (optional bonus feature)
+
+3.5 TRADING SYSTEM (PAPER TRADING)
+----------------------------------
+[ ] Buy order form (amount, order type: market/limit)
+[ ] Sell order form with holdings validation
+[ ] Order confirmation screen
+[ ] Transaction history with filtering
+[ ] Portfolio rebalancing simulation
+[ ] Unrealized P&L calculations
+[ ] Realized P&L tracking
+
+3.6 USER PROFILE
+----------------
+[ ] Profile picture upload (camera/gallery)
+[ ] Image cropping and compression
+[ ] Edit profile information
+[ ] Portfolio statistics (win rate, best trade, total return)
+[ ] Trading history export (CSV)
+[ ] App settings (notifications, currency preference, theme)
+[ ] Account deletion option
+
+================================================================================
+PHASE 4: ADMIN FEATURES (Weeks 8-9)
+================================================================================
+
+4.1 ADMIN DASHBOARD
+-------------------
+[ ] User statistics (total, active, new this week)
+[ ] System health indicators
+[ ] Recent activity feed
+[ ] Quick actions panel
+
+4.2 USER MANAGEMENT
+-------------------
+[ ] List all users with search and filters
+[ ] View user details and portfolio
+[ ] Edit user data (admin privileges)
+[ ] Suspend/activate user accounts
+[ ] Delete users (with confirmation)
+[ ] Impersonate user (for testing - optional)
+
+4.3 SYSTEM MANAGEMENT
+---------------------
+[ ] View all transactions across users
+[ ] Manual transaction correction
+[ ] System announcements/broadcasts
+[ ] Audit log viewing
+
+================================================================================
+PHASE 5: DATA & INTEGRATIONS (Week 10)
+================================================================================
+
+5.1 CRYPTO DATA API INTEGRATION
+-------------------------------
+[ ] Set up API service layer with axios
+[ ] Implement rate limiting handling
+[ ] Add response caching (react-query or custom)
+[ ] Create fallback/mock data for offline
+[ ] Handle API errors gracefully
+[ ] Implement data refresh strategies
+
+5.2 NEWS FEED INTEGRATION
+-------------------------
+[ ] News API integration (CryptoCompare, NewsAPI)
+[ ] News listing with pagination
+[ ] News detail view (webview or native)
+[ ] Category filtering
+[ ] Bookmark/save articles
+
+5.3 OFFLINE SUPPORT
+-------------------
+[ ] Detect online/offline status
+[ ] Queue transactions when offline
+[ ] Sync queue when back online
+[ ] Offline mode UI indicators
+[ ] Cached data display
+
+================================================================================
+PHASE 6: POLISH & QUALITY (Weeks 11-12)
+================================================================================
+
+6.1 UI/UX IMPROVEMENTS
+----------------------
+[ ] Dark mode/Light mode toggle
+[ ] Animations (react-native-reanimated)
+[ ] Gesture handling (react-native-gesture-handler)
+[ ] Haptic feedback
+[ ] Consistent spacing and typography system
+[ ] Icon set implementation
+
+6.2 ERROR HANDLING
+------------------
+[ ] Global error boundary
+[ ] User-friendly error messages
+[ ] Error reporting/logging system
+[ ] Retry mechanisms for failed operations
+[ ] Network error handling
+
+6.3 PERFORMANCE OPTIMIZATION
+----------------------------
+[ ] Implement memoization where needed
+[ ] Optimize list rendering (FlatList optimizations)
+[ ] Image lazy loading and caching
+[ ] Reduce re-renders with React.memo
+[ ] Profile app with React DevTools
+
+6.4 TESTING
+-----------
+[ ] Unit tests for utility functions
+[ ] Component tests with React Native Testing Library
+[ ] Integration tests for critical flows
+[ ] E2E tests with Detox (optional, time permitting)
+[ ] Test coverage reporting
+
+================================================================================
+PHASE 7: DOCUMENTATION & PRESENTATION (Weeks 13-14)
+================================================================================
+
+7.1 TECHNICAL DOCUMENTATION
+---------------------------
+[ ] Architecture documentation with diagrams
+[ ] API documentation
+[ ] Database schema documentation
+[ ] Setup and installation guide
+[ ] Code comments and JSDoc
+[ ] README with project overview
+
+7.2 USER DOCUMENTATION
+----------------------
+[ ] User guide/manual
+[ ] Admin guide
+[ ] FAQ section in app (optional)
+
+7.3 PRESENTATION PREPARATION
+----------------------------
+[ ] Create slide deck (problem, solution, architecture, demo)
+[ ] Prepare live demo script
+[ ] Record backup demo video
+[ ] Practice 5-10 minute presentation
+[ ] Prepare Q&A answers for common questions
+
+7.4 CODE QUALITY REVIEW
+-----------------------
+[ ] Remove console.logs and debug code
+[ ] Ensure consistent code style
+[ ] Add proper TypeScript types everywhere
+[ ] Review and clean up unused code
+[ ] Final git history cleanup
+
+================================================================================
+BONUS FEATURES (If Time Permits)
+================================================================================
+
+[ ] Push notifications for price alerts
+[ ] Social features (share portfolio, follow users)
+[ ] Leaderboard of top traders
+[ ] Trading competitions/challenges
+[ ] Multi-language support (i18n)
+[ ] Advanced charting with technical indicators
+[ ] Portfolio allocation pie chart
+[ ] DCA (Dollar Cost Averaging) simulator
+[ ] News sentiment analysis
+[ ] Widget for home screen (iOS/Android)
+
+================================================================================
+DELIVERABLES CHECKLIST
+================================================================================
+
+CODE:
+[ ] Fully functional React Native app
+[ ] Clean, documented codebase
+[ ] Git repository with meaningful commit history
+
+DOCUMENTATION:
+[ ] Requirements specification
+[ ] Architecture design document
+[ ] User manual
+[ ] Technical documentation
+[ ] Installation/setup guide
+
+PRESENTATION:
+[ ] Slide deck
+[ ] Live demo or recorded video
+[ ] Q&A preparation
+
+================================================================================
+API
+================================================================================
+CoinGecko info:
+    # Top 200 coins (price, market cap, volume, % change, image)
+    GET https://api.coingecko.com/api/v3/coins/markets
+    ?vs_currency=usd&order=market_cap_desc&per_page=200&page=1
+
+    # Historical chart data (prices array for charting)
+    GET https://api.coingecko.com/api/v3/coins/{id}/market_chart
+    ?vs_currency=usd&days=30
+
+Crypto News:
+    # Latest crypto news with source URLs
+    GET https://cryptopanic.com/api/free/v1/posts/
+    ?auth_token=YOUR_FREE_TOKEN&public=true&kind=news
+
+================================================================================
+NOTES
+================================================================================
+
+- Database will use SQLite for local storage with potential for cloud sync
+- Three user types: Customer, Admin, and extensible for future roles
+- Passwords must be hashed before storage (bcrypt)
+- Session persistence required for app restart scenarios
+- Charts to be implemented with chart.js or react-native-gifted-charts
+- All API calls should have try-catch with fallback UI states
+pen after the project gets completed.

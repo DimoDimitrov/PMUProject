@@ -1,0 +1,131 @@
+import { StyleSheet, Text, View, useColorScheme } from "react-native";
+import { appTheme } from "../constants/theme";
+import { sessionState } from "../constants/session";
+
+function formatCurrency(amount) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 2,
+  }).format(amount);
+}
+
+function getInitials(username) {
+  if (!username) {
+    return "U";
+  }
+
+  return username.trim().slice(0, 2).toUpperCase();
+}
+
+export default function AppTopHeader() {
+  const colorScheme = useColorScheme();
+  const colors = appTheme[colorScheme] ?? appTheme.light;
+  const isLoggedIn = sessionState.isLoggedIn;
+  const username = sessionState.user?.username ?? "User";
+  const availableFunds = sessionState.user?.availableFunds ?? 0;
+
+  return (
+    <View
+      style={[
+        styles.wrapper,
+        { backgroundColor: colors.surface, borderBottomColor: colors.border },
+      ]}
+    >
+      {isLoggedIn ? (
+        <View style={styles.loggedInRow}>
+          <View style={styles.userInfo}>
+            <View
+              style={[
+                styles.avatar,
+                { backgroundColor: colors.primary, borderColor: colors.border },
+              ]}
+            >
+              <Text style={[styles.avatarText, { color: colors.buttonText }]}>
+                {getInitials(username)}
+              </Text>
+            </View>
+            <View>
+              <Text style={[styles.usernameLabel, { color: colors.text }]}>
+                @{username}
+              </Text>
+              <Text style={[styles.statusLabel, { color: colors.text }]}>
+                Logged in
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.fundsBox}>
+            <Text style={[styles.fundsLabel, { color: colors.text }]}>
+              Available funds
+            </Text>
+            <Text style={[styles.fundsValue, { color: colors.title }]}>
+              {formatCurrency(availableFunds)}
+            </Text>
+          </View>
+        </View>
+      ) : (
+        <Text style={[styles.loggedOutText, { color: "#94A3B8" }]}>
+          You are not logged in. Sign in to view details.
+        </Text>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  wrapper: {
+    paddingTop: 14,
+    paddingBottom: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+  },
+  loggedInRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  userInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  avatar: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+  },
+  avatarText: {
+    fontSize: 14,
+    fontWeight: "800",
+  },
+  usernameLabel: {
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  statusLabel: {
+    fontSize: 12,
+    opacity: 0.9,
+    marginTop: 1,
+  },
+  fundsBox: {
+    alignItems: "flex-end",
+  },
+  fundsLabel: {
+    fontSize: 12,
+    opacity: 0.9,
+  },
+  fundsValue: {
+    marginTop: 1,
+    fontSize: 18,
+    fontWeight: "800",
+  },
+  loggedOutText: {
+    fontSize: 13,
+    textAlign: "center",
+    fontWeight: "600",
+  },
+});
