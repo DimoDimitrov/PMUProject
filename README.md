@@ -139,18 +139,6 @@ npm run ios
 
 ---
 
-## Default Admin Account
-
-When the app starts for the first time, it automatically creates an admin account:
-
-- **Email:** dimo.admin@cryptopaper.local
-- **Username:** DimoAdmin
-- **Password:** Admin12345!
-
-You can use this to access the User Management section and test admin features.
-
----
-
 ## API Endpoints Used
 
 ### CoinPaprika (Crypto Prices)
