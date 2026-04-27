@@ -13,17 +13,17 @@ import { useSessionState } from "../constants/session";
 import appLogo from "../assets/images/5eca783f2637b4df2ade7fd7ebc54ad8.webp";
 
 const MAIN_MENU_PAGES = [
-  { key: "dashboard", label: "Dashboard" },
-  { key: "crypto-list", label: "Cryptocurrency Listing" },
-  { key: "profile", label: "User Profile" },
-  { key: "user-management", label: "User Management", adminOnly: true },
-  { key: "news-feed", label: "News Feed" },
+  { key: "dashboard", label: "Табло" },
+  { key: "crypto-list", label: "Списък с криптовалути" },
+  { key: "profile", label: "Потребителски профил" },
+  { key: "user-management", label: "Управление на потребителите", adminOnly: true },
+  { key: "news-feed", label: "Новини" },
 ];
 
 const AUTH_MENU_PAGES = [
-  { key: "login", label: "Login", guestOnly: true },
-  { key: "register", label: "Register", guestOnly: true },
-  { key: "logout", label: "Log out", authOnly: true },
+  { key: "login", label: "Вход", guestOnly: true },
+  { key: "register", label: "Регистрация", guestOnly: true },
+  { key: "logout", label: "Изход", authOnly: true },
 ];
 
 export default function Index() {
@@ -73,9 +73,9 @@ export default function Index() {
             />
             <Text style={[styles.title, { color: colors.title }]}>CryptoPaper</Text>
           </View>
-        <Text style={[styles.subtitle, { color: colors.text }]}>Welcome!</Text>
+        <Text style={[styles.subtitle, { color: colors.text }]}>Добре дошли!</Text>
           <Text style={[styles.info, { color: colors.text }]}>
-            This is the best paper trading platform for you!
+            Това е най-добрата платформа за тестова търговия!
           </Text>
         </View>
 

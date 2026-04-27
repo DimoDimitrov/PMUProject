@@ -7,7 +7,7 @@ import { bootstrapDatabase } from "../database/bootstrap";
 export default function RootLayout() {
   useEffect(() => {
     bootstrapDatabase().catch((error) => {
-      console.error("Database bootstrap failed:", error);
+      console.error("Неуспешно зареждане на базата данни:", error);
     });
   }, []);
 
