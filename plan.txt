@@ -355,10 +355,5 @@ Crypto News:
 NOTES
 ================================================================================
 
-- Database will use SQLite for local storage with potential for cloud sync
-- Three user types: Customer, Admin, and extensible for future roles
-- Passwords must be hashed before storage (bcrypt)
-- Session persistence required for app restart scenarios
-- Charts to be implemented with chart.js or react-native-gifted-charts
-- All API calls should have try-catch with fallback UI states
-pen after the project gets completed.
+
+

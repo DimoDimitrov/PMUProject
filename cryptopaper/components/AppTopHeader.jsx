@@ -3,7 +3,7 @@ import { useSessionState } from "../constants/session";
 import { appTheme } from "../constants/theme";
 
 function formatCurrency(amount) {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("bg-BG", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 2,
@@ -59,14 +59,14 @@ export default function AppTopHeader() {
                 @{username}
               </Text>
               <Text style={[styles.statusLabel, { color: colors.text }]}>
-                Logged in
+                Влезли
               </Text>
             </View>
           </View>
 
           <View style={styles.fundsBox}>
             <Text style={[styles.fundsLabel, { color: colors.text }]}>
-              Available funds
+              Налични средства
             </Text>
             <Text style={[styles.fundsValue, { color: colors.title }]}>
               {formatCurrency(availableFunds)}
@@ -75,7 +75,7 @@ export default function AppTopHeader() {
         </View>
       ) : (
         <Text style={[styles.loggedOutText, { color: "#94A3B8" }]}>
-          You are not logged in. Sign in to view details.
+          Не сте влезли. Влезте, за да видите детайлите.
         </Text>
       )}
     </View>

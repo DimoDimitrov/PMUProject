@@ -2,6 +2,7 @@ import { router } from "expo-router";
 import { Pressable, StyleSheet, Text, View, useColorScheme } from "react-native";
 import { appTheme } from "../constants/theme";
 
+// PageHeader компонентът използва заглавието от PAGE_TITLES, което вече е на български
 export default function PageHeader({ title }) {
   const colorScheme = useColorScheme();
   const colors = appTheme[colorScheme] ?? appTheme.light;

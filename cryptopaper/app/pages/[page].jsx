@@ -15,22 +15,22 @@ import RegisterSection from "../../components/auth/RegisterSection";
 import { appTheme } from "../../constants/theme";
 
 const PAGE_TITLES = {
-  login: "Login",
-  register: "Register",
-  logout: "Log out",
-  dashboard: "Dashboard",
-  "crypto-list": "Cryptocurrency Listing",
-  "asset-detail": "Asset Detail",
-  profile: "User Profile",
-  "user-management": "User Management",
-  "news-feed": "News Feed",
+  login: "Вход",
+  register: "Регистрация",
+  logout: "Изход",
+  dashboard: "Табло",
+  "crypto-list": "Списък с криптовалути",
+  "asset-detail": "Детайли за актива",
+  profile: "Потребителски профил",
+  "user-management": "Управление на потребители",
+  "news-feed": "Новини",
 };
 
 const PAGE_NOTES = {
   "crypto-list":
-    "Each crypto card will include an Asset Detail button that opens the asset details screen.",
+    "Всяка карта с крипто включва бутон 'Детайли за актива', който отваря екрана с детайли за актива.",
   "asset-detail":
-    "This screen is where trading actions (buy/sell) will be implemented for the selected asset.",
+    "Този екран е за действията по търговия (купуване/продаване) за избрания актив.",
 };
 
 function normalizePageKey(pageValue) {
@@ -51,7 +51,7 @@ export default function GenericPage() {
   const selectedCoinName = normalizePageKey(coinName) ?? "Bitcoin";
   const pageNote =
     PAGE_NOTES[pageKey] ??
-    "This is a starter page. Next we can build the real content and features here.";
+    "Това е начална страница. Тук може да се изгради реалното съдържание и функционалности.";
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -66,7 +66,7 @@ export default function GenericPage() {
           <>
             <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
             <Text style={[styles.pageDescription, { color: colors.text }]}>
-              Overview of bought crypto assets for all users.
+              Преглед на закупените крипто активи за всички потребители.
             </Text>
             <DashboardSection colors={colors} />
           </>
@@ -74,15 +74,15 @@ export default function GenericPage() {
           <>
             <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
             <Text style={[styles.pageDescription, { color: colors.text }]}>
-              Live base market data from CoinPaprika.
+              Пазарни данни в реално време от CoinPaprika.
             </Text>
             <CryptoListSection colors={colors} />
           </>
         ) : pageKey === "asset-detail" ? (
           <>
-            <Text style={[styles.pageTitle, { color: colors.title }]}>Asset Detail</Text>
+            <Text style={[styles.pageTitle, { color: colors.title }]}>Детайли за актива</Text>
             <Text style={[styles.pageDescription, { color: colors.text }]}>
-              Base details and 30-day chart. Trading actions will be added here.
+              Основни детайли и 30-дневна графика. Тук ще бъдат добавени действията по търговия.
             </Text>
             <AssetChartSection
               colors={colors}
@@ -100,7 +100,7 @@ export default function GenericPage() {
           <>
             <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
             <Text style={[styles.pageDescription, { color: colors.text }]}>
-              Latest crypto headlines from the API.
+              Най-новите крипто заглавия от API.
             </Text>
             <NewsFeedSection colors={colors} />
           </>
@@ -108,7 +108,7 @@ export default function GenericPage() {
           <>
             <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
             <Text style={[styles.pageDescription, { color: colors.text }]}>
-              Manage account details and profile photo.
+              Управление на данните на акаунта и профилната снимка.
             </Text>
             <ProfileSection colors={colors} />
           </>
@@ -116,7 +116,7 @@ export default function GenericPage() {
           <>
             <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
             <Text style={[styles.pageDescription, { color: colors.text }]}>
-              View all system users and manage account credentials.
+              Преглед на всички потребители в системата и управление на акаунтните данни.
             </Text>
             <UserManagementSection colors={colors} />
           </>
@@ -124,7 +124,7 @@ export default function GenericPage() {
           <>
             <Text style={[styles.pageTitle, { color: colors.title }]}>{pageTitle}</Text>
             <Text style={[styles.pageDescription, { color: colors.text }]}>
-              Authentication.
+              Автентикация.
             </Text>
             {pageKey === "login" ? (
               <LoginSection colors={colors} />

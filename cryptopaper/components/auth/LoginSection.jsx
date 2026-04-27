@@ -18,7 +18,7 @@ export default function LoginSection({ colors }) {
 
       const user = await authenticateUser(email.trim(), password);
       if (!user) {
-        setErrorMessage("Invalid email or password.");
+        setErrorMessage("Невалиден имейл или парола.");
         return;
       }
 
@@ -33,7 +33,7 @@ export default function LoginSection({ colors }) {
 
       router.replace("/");
     } catch (error) {
-      setErrorMessage(error.message || "Login failed.");
+      setErrorMessage(error.message || "Влизането не бе успешно.");
     } finally {
       setIsSubmitting(false);
     }
@@ -46,12 +46,12 @@ export default function LoginSection({ colors }) {
         { backgroundColor: colors.surface, borderColor: colors.border },
       ]}
     >
-      <Text style={[styles.title, { color: colors.title }]}>Sign In</Text>
+      <Text style={[styles.title, { color: colors.title }]}>Вход</Text>
 
       <TextInput
         value={email}
         onChangeText={setEmail}
-        placeholder="Email"
+        placeholder="Имейл"
         placeholderTextColor="#94A3B8"
         keyboardType="email-address"
         autoCapitalize="none"
@@ -69,14 +69,14 @@ export default function LoginSection({ colors }) {
         <TextInput
           value={password}
           onChangeText={setPassword}
-          placeholder="Password"
+          placeholder="Парола"
           placeholderTextColor="#94A3B8"
           secureTextEntry={!isPasswordVisible}
           style={[styles.passwordInput, { color: colors.title }]}
         />
         <Pressable onPress={() => setIsPasswordVisible((prev) => !prev)}>
           <Text style={[styles.toggleText, { color: colors.primary }]}>
-            {isPasswordVisible ? "Hide" : "Show"}
+            {isPasswordVisible ? "Скрий" : "Покажи"}
           </Text>
         </Pressable>
       </View>
@@ -91,7 +91,7 @@ export default function LoginSection({ colors }) {
         disabled={isSubmitting}
       >
         <Text style={[styles.primaryButtonText, { color: colors.buttonText }]}>
-          {isSubmitting ? "Signing in..." : "Login"}
+          {isSubmitting ? "Влизане..." : "Вход"}
         </Text>
       </Pressable>
 
@@ -103,7 +103,7 @@ export default function LoginSection({ colors }) {
         }}
       >
         <Text style={[styles.secondaryButtonText, { color: colors.text }]}>
-          No account? Go to Register
+          Нямате акаунт? Отидете в Регистрация
         </Text>
       </Pressable>
     </View>

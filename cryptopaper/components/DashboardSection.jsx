@@ -33,7 +33,7 @@ export default function DashboardSection({ colors }) {
         setEntries(data);
         setErrorMessage("");
       } catch (error) {
-        setErrorMessage(error.message || "Failed to load dashboard data.");
+        setErrorMessage(error.message || "Неуспешно зареждане на данните за табло.");
       } finally {
         setIsLoading(false);
       }
@@ -49,30 +49,30 @@ export default function DashboardSection({ colors }) {
         { backgroundColor: colors.surface, borderColor: colors.border },
       ]}
     >
-      <Text style={[styles.title, { color: colors.title }]}>Purchased Assets</Text>
+      <Text style={[styles.title, { color: colors.title }]}>Закупени активи</Text>
       <Text style={[styles.description, { color: colors.text }]}>
-        All user positions with bought crypto, quantity, and buy price.
+        Всички позиции на потребителите с закупени крипто, количество и цена на закупуване.
       </Text>
 
       {!!errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
 
       {!isLoggedIn ? (
         <Text style={[styles.infoText, { color: colors.text }]}>
-          Login to view dashboard asset data.
+          Влезте в акаунта си, за да видите данните за табло.
         </Text>
       ) : isLoading ? (
         <Text style={[styles.infoText, { color: colors.text }]}>Loading assets...</Text>
       ) : entries.length === 0 ? (
         <Text style={[styles.infoText, { color: colors.text }]}>
-          No bought crypto entries yet.
+          Няма закупени крипто активи.
         </Text>
       ) : (
         <>
           <View style={[styles.headerRow, { borderColor: colors.border }]}>
-            <Text style={[styles.headerUser, { color: colors.title }]}>User</Text>
-            <Text style={[styles.headerCrypto, { color: colors.title }]}>Crypto</Text>
-            <Text style={[styles.headerQty, { color: colors.title }]}>Qty</Text>
-            <Text style={[styles.headerPrice, { color: colors.title }]}>Buy Price</Text>
+            <Text style={[styles.headerUser, { color: colors.title }]}>Потребител</Text>
+            <Text style={[styles.headerCrypto, { color: colors.title }]}>Крипто</Text>
+            <Text style={[styles.headerQty, { color: colors.title }]}>Количество</Text>
+            <Text style={[styles.headerPrice, { color: colors.title }]}>Цена на закупуване</Text>
           </View>
 
           {entries.map((entry) => (

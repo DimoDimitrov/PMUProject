@@ -124,42 +124,42 @@ export default function AssetDetailsSection({ colors, coinId }) {
       <DetailRow label="Rank" value={`#${details.rank ?? "N/A"}`} colors={colors} />
       <DetailRow label="Current Price" value={formatMoney(usdQuote.price)} colors={colors} />
       <DetailRow
-        label="24h Change"
+        label="24 часова промяна"
         value={formatPercent(usdQuote.percent_change_24h)}
         colors={colors}
       />
       <DetailRow
-        label="24h Volume"
+        label="24 часов обем"
         value={formatCompactNumber(usdQuote.volume_24h)}
         colors={colors}
       />
       <DetailRow
-        label="Market Cap"
+        label="Капитализирана стойност"
         value={formatCompactNumber(usdQuote.market_cap)}
         colors={colors}
       />
       <DetailRow
-        label="Circulating Supply"
+        label="Наличност"
         value={formatCompactNumber(details.circulating_supply)}
         colors={colors}
       />
       <DetailRow
-        label="Total Supply"
+        label="Общо наличност"
         value={formatCompactNumber(details.total_supply)}
         colors={colors}
       />
       <DetailRow
-        label="All Time High"
+        label="Максимална цена"
         value={formatMoney(usdQuote.ath_price)}
         colors={colors}
       />
       <DetailRow
-        label="From ATH"
+        label="От максималната цена"
         value={formatPercent(usdQuote.percent_from_price_ath)}
         colors={colors}
       />
       <View style={styles.lastRow}>
-        <Text style={[styles.detailLabel, { color: colors.text }]}>ATH Date</Text>
+        <Text style={[styles.detailLabel, { color: colors.text }]}>Дата на максималната цена</Text>
         <Text style={[styles.detailValue, { color: colors.title }]}>
           {usdQuote.ath_date ? new Date(usdQuote.ath_date).toLocaleDateString() : "N/A"}
         </Text>

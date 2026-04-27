@@ -18,7 +18,7 @@ export default function RegisterSection({ colors }) {
       setErrorMessage("");
 
       if (!username.trim() || !email.trim() || !password.trim()) {
-        setErrorMessage("Please fill all fields.");
+        setErrorMessage("Моля, попълнете всички полета.");
         return;
       }
 
@@ -42,7 +42,7 @@ export default function RegisterSection({ colors }) {
 
       router.replace("/");
     } catch (error) {
-      setErrorMessage(error.message || "Registration failed.");
+      setErrorMessage(error.message || "Регистрацията не бе успешна.");
     } finally {
       setIsSubmitting(false);
     }
@@ -55,12 +55,12 @@ export default function RegisterSection({ colors }) {
         { backgroundColor: colors.surface, borderColor: colors.border },
       ]}
     >
-      <Text style={[styles.title, { color: colors.title }]}>Create Account</Text>
+      <Text style={[styles.title, { color: colors.title }]}>Създаване на акаунт</Text>
 
       <TextInput
         value={username}
         onChangeText={setUsername}
-        placeholder="Username"
+        placeholder="Потребителско име"
         placeholderTextColor="#94A3B8"
         autoCapitalize="none"
         style={[
@@ -71,7 +71,7 @@ export default function RegisterSection({ colors }) {
       <TextInput
         value={email}
         onChangeText={setEmail}
-        placeholder="Email"
+        placeholder="Имейл"
         placeholderTextColor="#94A3B8"
         keyboardType="email-address"
         autoCapitalize="none"
@@ -89,14 +89,14 @@ export default function RegisterSection({ colors }) {
         <TextInput
           value={password}
           onChangeText={setPassword}
-          placeholder="Password"
+          placeholder="Парола"
           placeholderTextColor="#94A3B8"
           secureTextEntry={!isPasswordVisible}
           style={[styles.passwordInput, { color: colors.title }]}
         />
         <Pressable onPress={() => setIsPasswordVisible((prev) => !prev)}>
           <Text style={[styles.toggleText, { color: colors.primary }]}>
-            {isPasswordVisible ? "Hide" : "Show"}
+            {isPasswordVisible ? "Скрий" : "Покажи"}
           </Text>
         </Pressable>
       </View>
@@ -111,7 +111,7 @@ export default function RegisterSection({ colors }) {
         disabled={isSubmitting}
       >
         <Text style={[styles.primaryButtonText, { color: colors.buttonText }]}>
-          {isSubmitting ? "Creating account..." : "Register"}
+          {isSubmitting ? "Създаване на акаунт..." : "Регистрация"}
         </Text>
       </Pressable>
 
@@ -123,7 +123,7 @@ export default function RegisterSection({ colors }) {
         }}
       >
         <Text style={[styles.secondaryButtonText, { color: colors.text }]}>
-          Already have account? Go to Login
+          Вече имате акаунт? Отидете в Вход
         </Text>
       </Pressable>
     </View>

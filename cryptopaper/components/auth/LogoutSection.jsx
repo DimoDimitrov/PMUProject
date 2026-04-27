@@ -10,9 +10,9 @@ export default function LogoutSection({ colors }) {
         { backgroundColor: colors.surface, borderColor: colors.border },
       ]}
     >
-      <Text style={[styles.title, { color: colors.title }]}>Log out</Text>
+      <Text style={[styles.title, { color: colors.title }]}>Изход</Text>
       <Text style={[styles.text, { color: colors.text }]}>
-        End your current session and return to guest mode.
+        Завършете текущата сесия и се върнете в режим на гост.
       </Text>
       <Pressable
         style={[styles.button, { backgroundColor: colors.primary }]}
@@ -22,7 +22,7 @@ export default function LogoutSection({ colors }) {
         }}
       >
         <Text style={[styles.buttonText, { color: colors.buttonText }]}>
-          Confirm Log out
+          Потвърдете изхода
         </Text>
       </Pressable>
     </View>

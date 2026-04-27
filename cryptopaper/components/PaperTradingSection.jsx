@@ -11,7 +11,7 @@ import {
 
 function formatMoney(value) {
   if (typeof value !== "number" || Number.isNaN(value)) {
-    return "N/A";
+    return "Не е налична";
   }
 
   return new Intl.NumberFormat("en-US", {
@@ -51,7 +51,7 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
         setIsLoadingPrice(true);
         const response = await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`);
         if (!response.ok) {
-          throw new Error(`Could not load current price (${response.status})`);
+          throw new Error(`Неуспешно зареждане на текущата цена (${response.status})`);
         }
         const payload = await response.json();
         const price = payload?.quotes?.USD?.price;
@@ -61,7 +61,7 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
       } catch (error) {
         if (isMounted) {
           setCurrentPrice(null);
-          setErrorMessage(error.message || "Could not load current price.");
+          setErrorMessage(error.message || "Неуспешно зареждане на текущата цена.");
         }
       } finally {
         if (isMounted) {
@@ -120,19 +120,19 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
       setSuccessMessage("");
 
       if (!isLoggedIn || !user?.id) {
-        throw new Error("Login is required for trading.");
+        throw new Error("Влизането е задължително за търговия.");
       }
       if (!currentPrice) {
-        throw new Error("Current price is unavailable.");
+        throw new Error("Текущата цена не е налична.");
       }
       if (!Number.isFinite(tradeQuantity) || tradeQuantity <= 0) {
-        throw new Error("Enter a valid quantity greater than 0.");
+        throw new Error("Въведете валидно количество, по-голямо от 0.");
       }
 
       const totalCost = currentPrice * tradeQuantity;
       const availableFunds = Number(user.availableFunds ?? 0);
       if (totalCost > availableFunds) {
-        throw new Error("Insufficient funds for this trade.");
+        throw new Error("Недостатъчни средства за тази сделка.");
       }
 
       setIsSubmitting(true);
@@ -164,7 +164,7 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
       setQuantity("");
       setSuccessMessage(`Bought ${tradeQuantity} ${coinName}.`);
     } catch (error) {
-      setErrorMessage(error.message || "Buy order failed.");
+      setErrorMessage(error.message || "Купуването не бе успешно.");
     } finally {
       setIsSubmitting(false);
     }
@@ -176,16 +176,16 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
       setSuccessMessage("");
 
       if (!isLoggedIn || !user?.id) {
-        throw new Error("Login is required for trading.");
+        throw new Error("Влизането е задължително за търговия.");
       }
       if (!currentPrice) {
-        throw new Error("Current price is unavailable.");
+        throw new Error("Текущата цена не е налична.");
       }
       if (!Number.isFinite(tradeQuantity) || tradeQuantity <= 0) {
-        throw new Error("Enter a valid quantity greater than 0.");
+        throw new Error("Въведете валидно количество, по-голямо от 0.");
       }
       if (tradeQuantity > ownedQuantity) {
-        throw new Error("You do not have enough quantity to sell.");
+        throw new Error("Нямате достатъчно количество за продажба.");
       }
 
       setIsSubmitting(true);
@@ -233,7 +233,7 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
       setQuantity("");
       setSuccessMessage(`Sold ${tradeQuantity} ${coinName}.`);
     } catch (error) {
-      setErrorMessage(error.message || "Sell order failed.");
+      setErrorMessage(error.message || "Продажът не бе успешно.");
     } finally {
       setIsSubmitting(false);
     }
@@ -246,25 +246,25 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
         { backgroundColor: colors.surface, borderColor: colors.border },
       ]}
     >
-      <Text style={[styles.title, { color: colors.title }]}>Paper Trading</Text>
+      <Text style={[styles.title, { color: colors.title }]}>Paper Trading (Тестова търговия)</Text>
       <Text style={[styles.description, { color: colors.text }]}>
-        Trade {coinName} with your paper balance.
+        Търговете {coinName} с вашия тестов баланс.
       </Text>
 
       <View style={[styles.infoBox, { borderColor: colors.border }]}>
         <Text style={[styles.infoText, { color: colors.text }]}>
-          Current Price: {isLoadingPrice ? "Loading..." : formatMoney(currentPrice)}
+          Текуща цена: {isLoadingPrice ? "Зареждане..." : formatMoney(currentPrice)}
         </Text>
-        <Text style={[styles.infoText, { color: colors.text }]}>Owned: {ownedQuantity}</Text>
+        <Text style={[styles.infoText, { color: colors.text }]}>Имате: {ownedQuantity}</Text>
         <Text style={[styles.infoText, { color: colors.text }]}>
-          Estimated Value: {formatMoney(estimatedValue)}
+          Оценена стойност: {formatMoney(estimatedValue)}
         </Text>
       </View>
 
       <TextInput
         value={quantity}
         onChangeText={setQuantity}
-        placeholder="Quantity"
+        placeholder="Количество"
         placeholderTextColor="#94A3B8"
         keyboardType="decimal-pad"
         editable={!isSubmitting}
@@ -287,7 +287,7 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
           onPress={handleBuy}
         >
           <Text style={[styles.actionButtonText, { color: colors.buttonText }]}>
-            {isSubmitting ? "Working..." : "Buy"}
+            {isSubmitting ? "Работи..." : "Купи"}
           </Text>
         </Pressable>
         <Pressable
@@ -299,7 +299,7 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
           onPress={handleSell}
         >
           <Text style={[styles.actionButtonText, { color: "#FFFFFF" }]}>
-            {isSubmitting ? "Working..." : "Sell"}
+            {isSubmitting ? "Работи..." : "Продай"}
           </Text>
         </Pressable>
       </View>

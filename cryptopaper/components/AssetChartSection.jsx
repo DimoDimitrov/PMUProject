@@ -132,7 +132,7 @@ export default function AssetChartSection({ colors, coinId, coinName }) {
       <View style={styles.feedbackContainer}>
         <ActivityIndicator size="large" color={colors.primary} />
         <Text style={[styles.feedbackText, { color: colors.text }]}>
-          Loading 30-day chart...
+          Зареждане на 30-дневна графика...
         </Text>
       </View>
     );
@@ -150,7 +150,7 @@ export default function AssetChartSection({ colors, coinId, coinName }) {
     return (
       <View style={styles.feedbackContainer}>
         <Text style={[styles.feedbackText, { color: colors.text }]}>
-          No chart data available for this asset.
+          Няма данни за графика за този актив.
         </Text>
       </View>
     );
@@ -164,10 +164,10 @@ export default function AssetChartSection({ colors, coinId, coinName }) {
       ]}
     >
       <Text style={[styles.title, { color: colors.title }]}>
-        {coinName} - Last 30 Days
+        {coinName} - Последни 30 дни
       </Text>
       <Text style={[styles.price, { color: colors.text }]}>
-        Latest close: {formatMoney(latestPoint?.value)}
+        Последна цена: {formatMoney(latestPoint?.value)}
       </Text>
 
       <LineChart

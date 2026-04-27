@@ -73,7 +73,7 @@ export default function CryptoListSection({ colors }) {
         }
       } catch (error) {
         if (isMounted) {
-          setErrorMessage(error.message || "Could not load crypto prices.");
+          setErrorMessage(error.message || "Неуспешно зареждане на крипто пазарни данни.");
         }
       } finally {
         if (isMounted) {
@@ -94,7 +94,7 @@ export default function CryptoListSection({ colors }) {
       <View style={styles.feedbackContainer}>
         <ActivityIndicator size="large" color={colors.primary} />
         <Text style={[styles.feedbackText, { color: colors.text }]}>
-          Loading crypto market data...
+          Зареждане на крипто пазарни данни...
         </Text>
       </View>
     );
@@ -145,16 +145,16 @@ export default function CryptoListSection({ colors }) {
 
             <View style={styles.metricsRow}>
               <Text style={[styles.metricText, { color: colors.text }]}>
-                24h:{" "}
+                24 часа:{" "}
                 <Text style={{ color: isPositive ? "#16A34A" : "#DC2626" }}>
                   {formatPercent(change24h)}
                 </Text>
               </Text>
               <Text style={[styles.metricText, { color: colors.text }]}>
-                MCap: {formatCompactNumber(usdQuote.market_cap)}
+                Капитализирана стойност: {formatCompactNumber(usdQuote.market_cap)}
               </Text>
               <Text style={[styles.metricText, { color: colors.text }]}>
-                Vol: {formatCompactNumber(usdQuote.volume_24h)}
+                Обем: {formatCompactNumber(usdQuote.volume_24h)}
               </Text>
             </View>
 
@@ -168,7 +168,7 @@ export default function CryptoListSection({ colors }) {
               }
             >
               <Text style={[styles.assetDetailButtonText, { color: colors.buttonText }]}>
-                Asset Details
+                Детайли за актива
               </Text>
             </Pressable>
           </View>

@@ -24,7 +24,7 @@ export default function UserManagementSection({ colors }) {
       setUsers(data);
       setErrorMessage("");
     } catch (error) {
-      setErrorMessage(error.message || "Failed to load users.");
+      setErrorMessage(error.message || "Неуспешно зареждане на потребителите.");
     } finally {
       setIsLoading(false);
     }
@@ -42,9 +42,9 @@ export default function UserManagementSection({ colors }) {
           { backgroundColor: colors.surface, borderColor: colors.border },
         ]}
       >
-        <Text style={[styles.title, { color: colors.title }]}>User Management</Text>
+        <Text style={[styles.title, { color: colors.title }]}>Управление на потребителите</Text>
         <Text style={[styles.note, { color: colors.text }]}>
-          Only administrators can access this section.
+          Само администраторите могат да достъпят тази секция.
         </Text>
       </View>
     );
@@ -56,10 +56,10 @@ export default function UserManagementSection({ colors }) {
       setSuccessMessage("");
       setBusyUserId(targetUser.id);
       await adminDeleteUser(actorUserId, targetUser.id);
-      setSuccessMessage(`Deleted user @${targetUser.username}.`);
+      setSuccessMessage(`Потребителя @${targetUser.username} беше изтрит.`);
       await loadUsers();
     } catch (error) {
-      setErrorMessage(error.message || "Could not delete user.");
+      setErrorMessage(error.message || "Неуспешно изтриване на потребителя.");
     } finally {
       setBusyUserId(null);
     }
@@ -71,12 +71,12 @@ export default function UserManagementSection({ colors }) {
       setSuccessMessage("");
       setBusyUserId(targetUser.id);
       await adminSetUserPassword(actorUserId, targetUser.id, newPassword);
-      setSuccessMessage(`Password updated for @${targetUser.username}.`);
+      setSuccessMessage(`Паролата за @${targetUser.username} беше обновена.`);
       setNewPassword("");
       setIsPasswordVisible(false);
       setExpandedPasswordUserId(null);
     } catch (error) {
-      setErrorMessage(error.message || "Could not update password.");
+      setErrorMessage(error.message || "Неуспешно обновяване на паролата.");
     } finally {
       setBusyUserId(null);
     }
@@ -89,22 +89,22 @@ export default function UserManagementSection({ colors }) {
         { backgroundColor: colors.surface, borderColor: colors.border },
       ]}
     >
-      <Text style={[styles.title, { color: colors.title }]}>All Accounts</Text>
+      <Text style={[styles.title, { color: colors.title }]}>Всички акаунти</Text>
       <Text style={[styles.note, { color: colors.text }]}>
-        Normal users: password change + delete. Administrator users: password change only.
+        Нормални потребители: промяна на парола + изтриване. Администраторски потребители: промяна на парола само.
       </Text>
 
       {!!errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
       {!!successMessage && <Text style={styles.successText}>{successMessage}</Text>}
 
       <View style={[styles.tableHeader, { borderColor: colors.border }]}>
-        <Text style={[styles.headerCellWide, { color: colors.title }]}>User</Text>
-        <Text style={[styles.headerCell, { color: colors.title }]}>Role</Text>
-        <Text style={[styles.headerCellActions, { color: colors.title }]}>Actions</Text>
+        <Text style={[styles.headerCellWide, { color: colors.title }]}>Потребител</Text>
+        <Text style={[styles.headerCell, { color: colors.title }]}>Роля</Text>
+        <Text style={[styles.headerCellActions, { color: colors.title }]}>Действия</Text>
       </View>
 
       {isLoading ? (
-        <Text style={[styles.loadingText, { color: colors.text }]}>Loading users...</Text>
+        <Text style={[styles.loadingText, { color: colors.text }]}>Зареждане на потребителите...</Text>
       ) : (
         users.map((user) => {
           const isTargetAdmin = user.role === "admin";
@@ -129,7 +129,7 @@ export default function UserManagementSection({ colors }) {
                     disabled={isBusy}
                   >
                     <Text style={[styles.smallButtonText, { color: colors.buttonText }]}>
-                      {isExpanded ? "Cancel" : "Set Password"}
+                      {isExpanded ? "Отказ" : "Задаване на парола"}
                     </Text>
                   </Pressable>
                   {!isTargetAdmin && (
@@ -139,7 +139,7 @@ export default function UserManagementSection({ colors }) {
                       disabled={isBusy}
                     >
                       <Text style={[styles.smallButtonText, { color: "#FFFFFF" }]}>
-                        {isBusy ? "Working..." : "Delete"}
+                        {isBusy ? "Работи..." : "Изтриване"}
                       </Text>
                     </Pressable>
                   )}
@@ -157,7 +157,7 @@ export default function UserManagementSection({ colors }) {
                     <TextInput
                       value={newPassword}
                       onChangeText={setNewPassword}
-                      placeholder={`New password for @${user.username}`}
+                      placeholder={`Нова парола за @${user.username}`}
                       placeholderTextColor="#94A3B8"
                       secureTextEntry={!isPasswordVisible}
                       autoCapitalize="none"
@@ -165,7 +165,7 @@ export default function UserManagementSection({ colors }) {
                     />
                     <Pressable onPress={() => setIsPasswordVisible((prev) => !prev)}>
                       <Text style={[styles.toggleText, { color: colors.primary }]}>
-                        {isPasswordVisible ? "Hide" : "Show"}
+                        {isPasswordVisible ? "Скрий" : "Покажи"}
                       </Text>
                     </Pressable>
                   </View>
@@ -175,7 +175,7 @@ export default function UserManagementSection({ colors }) {
                     disabled={isBusy}
                   >
                     <Text style={[styles.saveButtonText, { color: colors.buttonText }]}>
-                      {isBusy ? "Saving..." : "Save Password"}
+                      {isBusy ? "Работи..." : "Запазване на паролата"}
                     </Text>
                   </Pressable>
                 </View>

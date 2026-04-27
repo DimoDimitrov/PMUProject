@@ -88,7 +88,7 @@ export default function NewsFeedSection({ colors }) {
         }
       } catch (error) {
         if (isMounted) {
-          setErrorMessage(error.message || "Could not load news right now.");
+          setErrorMessage(error.message || "Неуспешно зареждане на новини.");
         }
       } finally {
         if (isMounted) {
@@ -109,7 +109,7 @@ export default function NewsFeedSection({ colors }) {
       <View style={styles.feedbackContainer}>
         <ActivityIndicator size="large" color={colors.primary} />
         <Text style={[styles.feedbackText, { color: colors.text }]}>
-          Loading latest crypto news...
+          Зареждане на последните крипто новини...
         </Text>
       </View>
     );
@@ -129,7 +129,7 @@ export default function NewsFeedSection({ colors }) {
     return (
       <View style={styles.feedbackContainer}>
         <Text style={[styles.feedbackText, { color: colors.text }]}>
-          No news articles were returned from NewsData right now.
+          Няма новини от NewsData.
         </Text>
       </View>
     );

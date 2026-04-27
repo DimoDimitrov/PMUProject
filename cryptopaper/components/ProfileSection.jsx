@@ -27,7 +27,7 @@ export default function ProfileSection({ colors }) {
 
       const permission = await ImagePicker.requestCameraPermissionsAsync();
       if (!permission.granted) {
-        setErrorMessage("Camera permission is required to update photo.");
+        setErrorMessage("Необходимо е разрешение за камерата, за да актуализирате снимката.");
         return;
       }
 
@@ -47,7 +47,7 @@ export default function ProfileSection({ colors }) {
       });
 
       if (!updatedUser) {
-        setErrorMessage("Could not update profile right now.");
+        setErrorMessage("Профилът не може да бъде актуализиран в момента.");
         return;
       }
 
@@ -61,9 +61,9 @@ export default function ProfileSection({ colors }) {
           availableFunds: updatedUser.funds_usd,
         },
       });
-      setSuccessMessage("Profile photo updated.");
+      setSuccessMessage("Профилната снимка е актуализирана.");
     } catch (error) {
-      setErrorMessage(error.message || "Failed to capture photo.");
+      setErrorMessage(error.message || "Заснемането на снимка не бе успешно.");
     } finally {
       setIsSaving(false);
     }
@@ -87,9 +87,9 @@ export default function ProfileSection({ colors }) {
         },
       });
       setNewUsername("");
-      setSuccessMessage("Username updated.");
+      setSuccessMessage("Потребителското име е актуализирано.");
     } catch (error) {
-      setErrorMessage(error.message || "Could not update username.");
+      setErrorMessage(error.message || "Потребителското име не може да бъде актуализирано.");
     } finally {
       setIsSaving(false);
     }
@@ -104,9 +104,9 @@ export default function ProfileSection({ colors }) {
       await changePassword(user.id, currentPassword, newPassword);
       setCurrentPassword("");
       setNewPassword("");
-      setSuccessMessage("Password updated.");
+      setSuccessMessage("Паролата е актуализирана.");
     } catch (error) {
-      setErrorMessage(error.message || "Could not update password.");
+      setErrorMessage(error.message || "Паролата не може да бъде актуализирана.");
     } finally {
       setIsSaving(false);
     }
@@ -120,16 +120,16 @@ export default function ProfileSection({ colors }) {
           { backgroundColor: colors.surface, borderColor: colors.border },
         ]}
       >
-        <Text style={[styles.title, { color: colors.title }]}>User Profile</Text>
+        <Text style={[styles.title, { color: colors.title }]}>Потребителски профил</Text>
         <Text style={[styles.description, { color: colors.text }]}>
-          Login required before profile editing is available.
+          Трябва да влезете, за да редактирате профила си.
         </Text>
         <Pressable
           style={[styles.button, { backgroundColor: colors.primary }]}
           onPress={() => router.push("/pages/login")}
         >
           <Text style={[styles.buttonText, { color: colors.buttonText }]}>
-            Go to Login
+            Отидете в Вход
           </Text>
         </Pressable>
       </View>
@@ -143,7 +143,7 @@ export default function ProfileSection({ colors }) {
         { backgroundColor: colors.surface, borderColor: colors.border },
       ]}
     >
-      <Text style={[styles.title, { color: colors.title }]}>User Profile</Text>
+      <Text style={[styles.title, { color: colors.title }]}>Потребителски профил</Text>
       <Text style={[styles.username, { color: colors.text }]}>@{user.username}</Text>
 
       <View style={styles.photoWrapper}>
@@ -156,7 +156,7 @@ export default function ProfileSection({ colors }) {
               { borderColor: colors.border, backgroundColor: colors.background },
             ]}
           >
-            <Text style={[styles.placeholderText, { color: colors.text }]}>No Photo</Text>
+            <Text style={[styles.placeholderText, { color: colors.text }]}>Няма снимка</Text>
           </View>
         )}
       </View>
