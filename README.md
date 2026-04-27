@@ -139,18 +139,6 @@ npm run ios
 
 ---
 
-## Default Admin Account
-
-When the app starts for the first time, it automatically creates an admin account:
-
-- **Email:** dimo.admin@cryptopaper.local
-- **Username:** DimoAdmin
-- **Password:** Admin12345!
-
-You can use this to access the User Management section and test admin features.
-
----
-
 ## API Endpoints Used
 
 ### CoinPaprika (Crypto Prices)
@@ -163,18 +151,6 @@ You can use this to access the User Management section and test admin features.
 
 ---
 
-## What I Learned
-
-Building this project taught me a lot about:
-- React Native development with Expo
-- Local database management with SQLite
-- REST API integration and error handling
-- State management without Redux (using Context)
-- Building responsive UIs that work on different screen sizes
-- Security basics (password hashing, session management)
-
----
-
 ## Known Limitations
 
 - No real-time price updates (uses polling)
@@ -182,12 +158,6 @@ Building this project taught me a lot about:
 - News API requires a valid API key (free tier has limits)
 - No biometric authentication (planned but not implemented)
 - Web version has separate implementations for some features
-
----
-
-## License
-
-This is a university project. Feel free to use the code for learning purposes.
 
 ---
 
