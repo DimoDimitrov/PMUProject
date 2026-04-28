@@ -82,7 +82,9 @@ export default function DashboardSection({ colors }) {
                 <Text style={[styles.secondaryText, { color: colors.text }]}>{entry.email}</Text>
               </View>
               <Text style={[styles.cryptoCell, { color: colors.text }]}>{entry.crypto_title}</Text>
-              <Text style={[styles.qtyCell, { color: colors.text }]}>{entry.quantity}</Text>
+              <Text style={[styles.qtyCell, { color: colors.text }]}>
+                {parseFloat(Number(entry.quantity).toFixed(5))}
+              </Text>
               <Text style={[styles.priceCell, { color: colors.text }]}>{formatPrice(entry.price)}</Text>
             </View>
           ))}

@@ -84,14 +84,13 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
         setOwnedQuantity(0);
         return;
       }
-
       const entries = await listPortfolioByUserId(user.id);
       const totalForCoin = entries
         .filter((entry) => entry.crypto_title === coinName)
         .reduce((sum, entry) => sum + Number(entry.quantity ?? 0), 0);
-
+      const rounded = parseFloat(totalForCoin.toFixed(10));
       if (isMounted) {
-        setOwnedQuantity(totalForCoin);
+        setOwnedQuantity(rounded < 1e-9 ? 0 : rounded);
       }
     }
 
@@ -106,12 +105,12 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
       setOwnedQuantity(0);
       return;
     }
-
     const entries = await listPortfolioByUserId(user.id);
     const totalForCoin = entries
       .filter((entry) => entry.crypto_title === coinName)
       .reduce((sum, entry) => sum + Number(entry.quantity ?? 0), 0);
-    setOwnedQuantity(totalForCoin);
+    const rounded = parseFloat(totalForCoin.toFixed(10));
+    setOwnedQuantity(rounded < 1e-9 ? 0 : rounded);
   }
 
   async function handleBuy() {
@@ -255,7 +254,7 @@ export default function PaperTradingSection({ colors, coinId, coinName }) {
         <Text style={[styles.infoText, { color: colors.text }]}>
           Текуща цена: {isLoadingPrice ? "Зареждане..." : formatMoney(currentPrice)}
         </Text>
-        <Text style={[styles.infoText, { color: colors.text }]}>Имате: {ownedQuantity}</Text>
+        <Text style={[styles.infoText, { color: colors.text }]}>Имате: {parseFloat((Number(ownedQuantity).toFixed(5)))}</Text>
         <Text style={[styles.infoText, { color: colors.text }]}>
           Оценена стойност: {formatMoney(estimatedValue)}
         </Text>
