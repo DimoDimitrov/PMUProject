@@ -30,7 +30,28 @@ export default function DashboardSection({ colors }) {
       try {
         setIsLoading(true);
         const data = await listAllPortfolioEntries();
-        setEntries(data);
+
+        // Групираме по потребител + криптовалута
+        const grouped = Object.values(
+          data.reduce((acc, entry) => {
+            const key = `${entry.user_id}_${entry.crypto_title}`;
+            if (!acc[key]) {
+              acc[key] = {
+                ...entry,
+                quantity: 0,
+              };
+            }
+            acc[key].quantity += Number(entry.quantity ?? 0);
+            return acc;
+          }, {})
+        );
+
+        // Филтрираме записи с количество 0 или по-малко
+        const filtered = grouped.filter(
+          (entry) => parseFloat(entry.quantity.toFixed(10)) > 1e-9
+        );
+
+        setEntries(filtered);
         setErrorMessage("");
       } catch (error) {
         setErrorMessage(error.message || "Неуспешно зареждане на данните за табло.");
